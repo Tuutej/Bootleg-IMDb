@@ -42,8 +42,12 @@
 
             <label>Select genre</label>				
       			<select th:field="*{genre}" class="form-control">
-					<option value="" disabled selected>Select genre</option>
-        		   	<option th:each="genre : ${genres}" th:value="${genre.genreid}" th:text="${genre.name}"></option>
+					<option value="" disabled>Select genre</option>
+    				<option th:each="genreItem : ${genres}" 
+         					th:value="${genreItem.genreid}"
+            				th:text="${genreItem.name}"
+            				th:selected="${genreItem.genreid == movie.genre.genreid}"> 
+    				</option>
        			</select>
             <p th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="error-message" style="color: red;"></p>
             
