@@ -13,7 +13,7 @@
         }
         .search-btn {
        		display: inline-block;
-        	vertical-align: top;
+        	margin-left: 10px;
   		}
         .logout-btn {
             float: right;
@@ -39,6 +39,9 @@
 	<div class="d-inline-block">
 		<form th:action="@{/movies/filtered}" method="GET">
     		<input type="text" name="query" placeholder="Search by title or director" class="form-control search-bar" />
+    		
+    		<div style="clear: both; display: block; height: 5px;"></div>
+    		
     		<button type="submit" class="btn btn-primary search-btn">Search</button>
 		</form>
 	</div>
