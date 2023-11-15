@@ -1,0 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+		<title>Bootleg IMDb</title>
+	</head>
+	
+	<body>
+	<div class="container">
+	<h1>Add a new genre</h1>
+		<div class="col-md-4">
+			<form th:object="${genre}" th:action="@{savegenre}" action="#" method="post">
+				<input type="text" th:field="*{name}" class="form-control"
+				placeholder="Genre name" />
+				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message" style="color: red;"></p>
+				
+				<div style="clear: both; display: block; height: 10px;"></div>
+				
+				<input type="submit" name="action" class="btn btn-primary" value="Save"></input>
+				<a class="btn btn-secondary" th:href="@{/genrelist}">Cancel</a>
+			</form>
+		</div>
+	</div>
+	</body>
+</html>

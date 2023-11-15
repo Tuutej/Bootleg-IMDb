@@ -1,0 +1,15 @@
+package hh.sof03.bootlegimdb;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
+@TestPropertySource(locations = "classpath:application-test.properties")
+@SpringBootTest
+class BootlegImdbApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

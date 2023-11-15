@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Bootleg IMDb</title>
+    <style>
+        .search-bar {
+            width: 25%; 
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .logout-btn {
+            float: right;
+             margin-right: 10px;
+        }
+
+        .login-btn {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bootleg IMDb</h1>
+	<h2 th:inline="text">
+		<span sec:authorize="isAnonymous()">Welcome guest!</span>
+		<span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span>!</span>
+	</h2>
+
+    <div style="clear: both; display: block; height: 10px;"></div>
+    
+	<div class="d-inline-block">
+		<form th:action="@{/movies/filtered}" method="GET">
+    		<input type="text" name="query" placeholder="Search by title or director" class="form-control search-bar" />
+    		<button type="submit" class="btn btn-primary">Search</button>
+		</form>
+	</div>
+	
+	<div sec:authorize="isAuthenticated()" class="logout-btn">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign out" class="btn btn-danger"/>
+		</form>
+	</div>
+		
+	<div sec:authorize="isAnonymous()" class="login-btn">
+		<a href="/login" class="btn btn-primary">Login</a>
+	</div>
+
+	<div style="clear: both; display: block; height: 10px;"></div>
+    
+    <table class="table table-striped">
+    <tr>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Release year</th>
+        <th>Runtime in minutes</th>
+        <th>Box office in USD</th>
+        <th>Genre</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Delete/Edit</th> 
+    </tr>
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.title}">Title</td>
+        <td th:text="${movie.director}">Director</td>
+        <td th:text="${movie.year}">Year</td>
+        <td th:text="${movie.runtime}">Runtime in minutes</td>
+        <td th:text="${movie.boxoffice}">Box office in millions</td>
+        <td>
+    		<span th:if="${movie.genre != null}" th:text="${movie.genre.name}"></span>
+   			<span th:unless="${movie.genre != null}">No genre selected</span>
+		</td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <a th:href="@{/delete/{id}(id=${movie.id})}" class="btn btn-danger">Delete</a>
+            <a th:href="@{/edit/{id}(id=${movie.id})}" class="btn btn-primary">Edit</a>
+        </td>
+    </tr>
+	</table>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <a href="/add" class="btn btn-success">Add Movie</a>
+        <a href="/genrelist" class="btn btn-primary">List Genres</a>
+    </div>
+</body>
+</html>

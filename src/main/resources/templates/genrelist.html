@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Bootleg IMDb - Genres</title>
+</head>
+
+<body>
+    <h1>Genres</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="genre : ${genres}">
+            <td th:text="${genre.name}">Name</td>
+            <td>
+                <form th:action="@{'/deletegenre/' + ${genre.genreid}}" method="post">
+   					<input type="submit" class="btn btn-danger" value="Delete"></input>
+				</form>
+            </td>
+        </tr>
+    </table>
+    <a href="/addgenre" class="btn btn-success">Add Genre</a>
+    <a href="/movielist" class="btn btn-primary">Back to Movie List</a>
+</body>
+</html>

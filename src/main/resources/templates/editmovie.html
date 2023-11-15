@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Bootleg IMDb</title>
+</head>
+
+<body>
+<div class="container">
+    <h1>Edit Movie Information</h1>
+    <div class="col-md-4">
+        <form th:object="${movie}" th:action="@{../savemovie}" action="#" method="post">
+
+            <input type="hidden" th:field="*{id}" class="form-control"/>
+
+            <input type="text" th:field="*{title}" class="form-control"
+                   placeholder="Title" />
+			<p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message" style="color: red;"></p>
+            
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <input type="text" th:field="*{director}" class="form-control"
+                   placeholder="Director" />
+             <p th:if="${#fields.hasErrors('director')}" th:errors="*{director}" class="error-message" style="color: red;"></p>
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <input type="text" th:field="*{year}" class="form-control"
+                   placeholder="Release year" />
+            <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="error-message" style="color: red;"></p>
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <input type="text" th:field="*{runtime}" class="form-control"
+                   placeholder="Runtime in minutes" />
+            <p th:if="${#fields.hasErrors('runtime')}" th:errors="*{runtime}" class="error-message" style="color: red;"></p>
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <input type="text" th:field="*{boxoffice}" class="form-control"
+                   placeholder="Box office in millions" />
+            <p th:if="${#fields.hasErrors('boxoffice')}" th:errors="*{boxoffice}" class="error-message" style="color: red;"></p>
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+            
+            <label>Select genre</label>				
+      			<select th:field="*{genre}" class="form-control">
+        		   	<option th:each="genre : ${genres}" th:value="${genre.genreid}" th:text="${genre.name}"></option>
+       			</select>
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <input type="submit" name="action" class="btn btn-primary" value="Save"></input>
+            <a class="btn btn-secondary" th:href="@{/movielist}">Cancel</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

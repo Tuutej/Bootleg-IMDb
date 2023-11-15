@@ -1,0 +1,7 @@
+HELP.md
+target/
+
+
+# Ignore env variables file
+env.properties
+.env
