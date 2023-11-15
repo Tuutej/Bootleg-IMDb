@@ -6,13 +6,11 @@
     <title>Bootleg IMDb</title>
     <style>
         .search-bar {
-            width: 70%; 
-            display: inline-block;
+            width: 50%; 
             margin-right: 10px;
             margin-left: 10px
         }
         .search-btn {
-       		display: inline-block;
         	margin-left: 10px;
   		}
         .logout-btn {
@@ -36,7 +34,7 @@
 
     <div style="clear: both; display: block; height: 10px;"></div>
     
-	<div class="d-inline-block">
+	<div>
 		<form th:action="@{/movies/filtered}" method="GET">
     		<input type="text" name="query" placeholder="Search by title or director" class="form-control search-bar" />
     		
